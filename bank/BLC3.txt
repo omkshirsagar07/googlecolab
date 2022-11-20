@@ -1,0 +1,56 @@
+Code Present at : https://snipper.io/s/-MmINyu1JPIMvHwkED1K
+In 1st terminal : 
+npm install ganache web3@1.2.6
+
+ Set-ExecutionPolicy RemoteSigned CurrentUser
+
+./node_modules/.bin/ganache-cli           
+
+In 2nd terminal : 
+ npm install -g http-server
+
+npm install solc@0.6.4
+
+http-server
+
+
+
+----------------------------------------------------------------------------------------------------------
+1.Create blank folder named bankdaap on d drive
+2.Open vscode
+
+3. Click on open folder and select blank folder created on  drive (Import folder)(must have installed nodejs)
+
+
+6. Split terminle
+7.On first terminle install ganache and web3 using  
+           npm install ganache cliweb3@1.2.6
+(if ganache is installed proprly in folder node_modules and json files will be available) 
+(for installation of ganache server if you recieved error execute command no.8 otherwise 9)
+8.Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+9 Now keep working ganache server on first terminle using 
+                 .\node_modules\.bin\ganache-cli
+10.open second terminle and  install http server and solidity compiler using
+     npm install -g http-server
+     npm install solc@0.6.4
+start http server using http-server it will written you three adresses check any one..
+UI will be visible .. Also add solidity extension.. for further process of scripting stop http server using ctrl+c
+11.click node on second terminle.. 
+    node
+12. Web3 = require('web3')
+13. web3 = new Web3("http://localhost:8545")
+14. web3.eth.getAccounts(console.log)
+15. bytecode = fs.readFileSync('Bank.bin').toString()
+16. abi = JSON.parse(fs.readFileSync('Bank.abi').toString())
+17. deployedContract = new web3.eth.Contract(abi)
+
+
+deployedContract.deploy({
+data: bytecode}).send({
+from: '0x1093ba04166CAD8DAA54B7E1344f6B264Ae07590',
+gas: 1500000,
+gasPrice: web3.utils.toWei('0.00003', 'ether')
+}).then((newContractInstance) => {
+deployedContract.options.address = newContractInstance.options.address
+console.log(newContractInstance.options.address)
+});
